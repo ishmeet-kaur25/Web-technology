@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Experiment 7 - Contact Page</title>
+<head> 
+  <title>Experiment 8 - Order Cart</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-   <!-- Logo + Heading -->
+      <!-- Logo -->
   <div class="logo-area">
-    <img src="images/logo.png" width="90" alt="Restaurant Logo">
-    <h1 class="heading"> Ludhiana Da Dhaba</h1>
+    <img src="images/logo.png" width="100" alt="Restaurant Logo">
+    <h1 class="heading">Ludhiana Da Dhaba</h1>
   </div>
 
   <!-- Navbar -->
@@ -19,62 +19,61 @@
   <a href="exp2.HTML">Menu</a>
   <a href="exp3.HTML">Gallery</a>
   <a href="exp4.HTML">Reservation</a>
-  <a href="exp7.HTML">Contact</a>
-      <a href="exp9.HTML">Cart</a>
+  <a href="exp5.HTML">Contact</a>
+      <a href="exp7.HTML">Cart</a>
 </div>
+  <h1 class="heading">🛒 Ludhiana Da Dhaba Cart</h1>
+  <h2 class="subheading">Your Selected Items</h2>
 
+  <!-- Cart Table -->
+  <table class="menu-table">
+    <tr>
+      <th>Dish</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
 
-  <h2 class="subheading">Contact Us</h2>
+    <tr>
+      <td>Shahi Paneer</td>
+      <td>1</td>
+      <td>₹220</td>
+    </tr>
 
-  <!-- Contact Details -->
-<p>
-📍 Address: Gill Road, Kailash Nagar, Ludhiana, Punjab – 141006  
-</p>
+    <tr>
+      <td>Butter Naan</td>
+      <td>3</td>
+      <td>₹120</td>
+    </tr>
 
-<p>
-📞 Phone: +91 98760 43210  
-</p>
+    <tr>
+      <td>Sweet Lassi</td>
+      <td>2</td>
+      <td>₹140</td>
+    </tr>
 
-<p>
-📧 Email: contact@ludhianadadhaba.com  
-</p>
+    <tr>
+      <th colspan="2">Total</th>
+      <th>₹480</th>
+    </tr>
+  </table>
 
+  <!-- Order Form -->
+  <h2 class="menu-title">📦 Place Your Order</h2>
 
-  <hr>
+  <div class="contact-form">
+    <form>
+      <label>Name:</label><br>
+      <input type="text" placeholder="Enter your name"><br><br>
 
-  <h2>Feedback Form</h2>
+      <label>Phone:</label><br>
+      <input type="tel" placeholder="Enter phone number"><br><br>
 
-  <form class="contact-form">
+      <label>Delivery Address:</label><br>
+      <textarea rows="4" placeholder="Enter address"></textarea><br><br>
 
-    <!-- Name -->
-    <label>Your Name:</label><br>
-    <input type="text" placeholder="Enter your name">
-    <br><br>
-
-    <!-- Email -->
-    <label>Your Email:</label><br>
-    <input type="email" placeholder="Enter your email">
-    <br><br>
-
-    <!-- Rating Dropdown -->
-    <label>How was our service?</label><br>
-    <select>
-      <option>Excellent</option>
-      <option>Good</option>
-      <option>Average</option>
-      <option>Poor</option>
-    </select>
-    <br><br>
-
-    <!-- Message -->
-    <label>Your Message:</label><br>
-    <textarea rows="5" cols="40" placeholder="Write your feedback..."></textarea>
-    <br><br>
-
-    <!-- Submit Button -->
-    <input type="submit" value="Send Feedback">
-
-  </form>
+      <input type="submit" value="Confirm Order">
+    </form>
+  </div>
 
 </body>
 </html>
