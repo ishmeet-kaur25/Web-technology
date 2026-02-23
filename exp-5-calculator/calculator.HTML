@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+        *{box-sizing:border-box;margin:0}
+        body{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            background:linear-gradient(135deg,#4d2e1b 0%,#080808 100%);
+            font-family:system-ui,sans-serif;
+            padding:20px;
+        }
+        .container{
+            display:flex;
+            gap:40px;
+            flex-wrap:wrap;
+            justify-content:center;
+        }
+        .calculator{
+            width:340px;
+            background:#1a120b;
+            padding:15px;
+            border-radius:30px;
+            box-shadow:0 20px 40px rgba(212,124,58,0.3);
+            border:1px solid #d47c3a30;
+        }
+        .title{
+            color:#f09b4a;
+            text-align:center;
+            margin-bottom:8px;
+            font-size:18px;
+            font-weight:bold;
+        }
+        .display{
+            height:60px;
+            background:#2a1e14;
+            color:#ffb366;
+            font-size:36px;
+            text-align:right;
+            padding:5px 15px;
+            line-height:60px;
+            margin-bottom:15px;
+            border-radius:15px;
+            border:1px solid #d47c3a;
+        }
+        .sci-rows{
+            display:flex;
+            flex-direction:column;
+            gap:5px;
+            margin-bottom:15px;
+        }
+        .sci-row{
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:4px;
+        }
+        .sci-btn{
+            background:#d47c3a;
+            color:white;
+            border:none;
+            border-radius:15px;
+            height:35px;
+            font-size:12px;
+            cursor:pointer;
+            font-weight:600;
+            box-shadow:0 2px 4px rgba(0,0,0,0.3);
+        }
+        .sci-btn:hover{background:#e68a48}
+        .buttons{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:8px;
+        }
+        button{
+            height:55px;
+            border:none;
+            border-radius:25px;
+            font-size:20px;
+            cursor:pointer;
+            font-weight:600;
+            transition:0.2s;
+            box-shadow:0 4px 6px rgba(0,0,0,0.3);
+        }
+        button:hover{transform:translateY(-2px);filter:brightness(110%)}
+        .num{
+            background:#3a2a1f;
+            color:#ffb366;
+            border-bottom:3px solid #d47c3a;
+        }
+        .num:hover{background:#4d382a}
+        .operator{
+            background:#f09b4a;
+            color:#1a120b;
+            font-size:24px;
+            border-bottom:3px solid #b86b2e;
+        }
+        .func{
+            background:#b86b2e;
+            color:white;
+            border-bottom:3px solid #8a4f22;
+        }
+        .zero{grid-column:span 2}
+        .equal{
+            background:#ffa54d;
+            color:#1a120b;
+            border-bottom:3px solid #cc823d;
+        }
+        [style*="grid-template-columns: repeat(6, 1fr)"]{margin-bottom:2px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- LEFT: Normal Calculator -->
+        <div class="calculator">
+            <div class="title">NORMAL</div>
+            <div class="display" id="normalDisplay">0</div>
+            <div class="buttons">
+                <button class="func" onclick="nClear()">C</button>
+                <button class="func" onclick="nPlusMinus()">+/-</button>
+                <button class="func" onclick="nPercent()">%</button>
+                <button class="operator" onclick="nOp('/')">÷</button>
+                <button class="num" onclick="nAdd(7)">7</button>
+                <button class="num" onclick="nAdd(8)">8</button>
+                <button class="num" onclick="nAdd(9)">9</button>
+                <button class="operator" onclick="nOp('*')">×</button>
+                <button class="num" onclick="nAdd(4)">4</button>
+                <button class="num" onclick="nAdd(5)">5</button>
+                <button class="num" onclick="nAdd(6)">6</button>
+                <button class="operator" onclick="nOp('-')">−</button>
+                <button class="num" onclick="nAdd(1)">1</button>
+                <button class="num" onclick="nAdd(2)">2</button>
+                <button class="num" onclick="nAdd(3)">3</button>
+                <button class="operator" onclick="nOp('+')">+</button>
+                <button class="num zero" onclick="nAdd(0)">0</button>
+                <button class="num" onclick="nAdd('.')">.</button>
+                <button class="equal" onclick="nCalc()">=</button>
+            </div>
+        </div>
+
+        <!-- RIGHT: Scientific Calculator -->
+        <div class="calculator">
+            <div class="title">SCIENTIFIC</div>
+            <div class="display" id="sciDisplay">0</div>
+            
+            <div class="sci-rows">
+                <div class="sci-row">
+                    <button class="sci-btn" onclick="sAdd('(')">(</button>
+                    <button class="sci-btn" onclick="sAdd(')')">)</button>
+                    <button class="sci-btn" onclick="sMC()">mc</button>
+                    <button class="sci-btn" onclick="sMplus()">m+</button>
+                    <button class="sci-btn" onclick="sMminus()">m-</button>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px">
+                    <button class="sci-btn" onclick="sAdd('2nd')">2nd</button>
+                    <button class="sci-btn" onclick="sSquare()">x²</button>
+                    <button class="sci-btn" onclick="sCube()">x³</button>
+                    <button class="sci-btn" onclick="sPower()">x^y</button>
+                    <button class="sci-btn" onclick="sExp()">e^x</button>
+                    <button class="sci-btn" onclick="sTen()">10^x</button>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px">
+                    <button class="sci-btn" onclick="sRecip()">1/x</button>
+                    <button class="sci-btn" onclick="sSqrt2()">²√x</button>
+                    <button class="sci-btn" onclick="sSqrt3()">³√x</button>
+                    <button class="sci-btn" onclick="sSqrt()">√x</button>
+                    <button class="sci-btn" onclick="sLn()">ln</button>
+                    <button class="sci-btn" onclick="sLog()">log</button>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px">
+                    <button class="sci-btn" onclick="sFact()">x!</button>
+                    <button class="sci-btn" onclick="sSin()">sin</button>
+                    <button class="sci-btn" onclick="sCos()">cos</button>
+                    <button class="sci-btn" onclick="sTan()">tan</button>
+                    <button class="sci-btn" onclick="sAdd('ε')">ε</button>
+                    <button class="sci-btn" onclick="sAdd('E')">EE</button>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px">
+                    <button class="sci-btn" onclick="sRand()">Rand</button>
+                    <button class="sci-btn" onclick="sSinh()">sinh</button>
+                    <button class="sci-btn" onclick="sCosh()">cosh</button>
+                    <button class="sci-btn" onclick="sTanh()">tanh</button>
+                    <button class="sci-btn" onclick="sPi()">π</button>
+                    <button class="sci-btn" onclick="sAdd('°')">Deg</button>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="func" onclick="sClear()">AC</button>
+                <button class="func" onclick="sPercent()">%</button>
+                <button class="operator" onclick="sOp('/')">÷</button>
+                <button class="operator" onclick="sOp('*')">×</button>
+                <button class="num" onclick="sAdd(7)">7</button>
+                <button class="num" onclick="sAdd(8)">8</button>
+                <button class="num" onclick="sAdd(9)">9</button>
+                <button class="operator" onclick="sOp('-')">−</button>
+                <button class="num" onclick="sAdd(4)">4</button>
+                <button class="num" onclick="sAdd(5)">5</button>
+                <button class="num" onclick="sAdd(6)">6</button>
+                <button class="operator" onclick="sOp('+')">+</button>
+                <button class="num" onclick="sAdd(1)">1</button>
+                <button class="num" onclick="sAdd(2)">2</button>
+                <button class="num" onclick="sAdd(3)">3</button>
+                <button class="operator" onclick="sOp('=')" style="background:#f09b4a">=</button>
+                <button class="func" onclick="sPlusMinus()">+/−</button>
+                <button class="num zero" onclick="sAdd(0)">0</button>
+                <button class="num" onclick="sAdd('.')">.</button>
+                <button class="equal" onclick="sCalc()">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Normal calculator
+        let nd=document.getElementById('normalDisplay'), nc='', np='', no=null;
+        function nAdd(x){if(x=='.'&&nc.includes('.'))return; nc+=x; nd.innerText=nc;}
+        function nOp(o){if(nc==='')return; np=nc; nc=''; no=o;}
+        function nCalc(){
+            if(np===''||nc===''||no===null)return;
+            let a=Number(np), b=Number(nc), r;
+            if(no=='+')r=a+b; else if(no=='-')r=a-b; else if(no=='*')r=a*b; else if(no=='/')r=a/b;
+            nd.innerText=r; nc=r; np=''; no=null;
+        }
+        function nClear(){nc=''; np=''; no=null; nd.innerText='0';}
+        function nPlusMinus(){if(nc!==''){nc=String(-parseFloat(nc)); nd.innerText=nc;}}
+        function nPercent(){if(nc!==''){nc=String(parseFloat(nc)/100); nd.innerText=nc;}}
+
+        // Scientific calculator
+        let sd=document.getElementById('sciDisplay'), sc='', sp='', so=null;
+        function sAdd(x){if(x=='.'&&sc.includes('.'))return; sc+=x; sd.innerText=sc;}
+        function sClear(){sc=''; sp=''; so=null; sd.innerText='0';}
+        function sPercent(){if(sc!==''){sc=String(parseFloat(sc)/100); sd.innerText=sc;}}
+        function sPlusMinus(){if(sc!==''){sc=String(-parseFloat(sc)); sd.innerText=sc;}}
+        function sOp(o){if(o==='='){sCalc(); return;} if(sc==='')return; sp=sc; sc=''; so=o;}
+        function sCalc(){
+            if(sp===''||sc===''||so===null)return;
+            let a=Number(sp), b=Number(sc), r;
+            if(so=='+')r=a+b; else if(so=='-')r=a-b; else if(so=='*')r=a*b; else if(so=='/')r=a/b;
+            sd.innerText=r; sc=r; sp=''; so=null;
+        }
+        function sSquare(){if(sc){let v=parseFloat(sc); sc=String(v*v); sd.innerText=sc;}}
+        function sCube(){if(sc){let v=parseFloat(sc); sc=String(v*v*v); sd.innerText=sc;}}
+        function sSqrt(){if(sc){let v=parseFloat(sc); sc=String(Math.sqrt(v)); sd.innerText=sc;}}
+        function sRecip(){if(sc&&sc!='0'){let v=parseFloat(sc); sc=String(1/v); sd.innerText=sc;}}
+        function sSin(){if(sc){let v=parseFloat(sc); sc=String(Math.sin(v)); sd.innerText=sc;}}
+        function sCos(){if(sc){let v=parseFloat(sc); sc=String(Math.cos(v)); sd.innerText=sc;}}
+        function sTan(){if(sc){let v=parseFloat(sc); sc=String(Math.tan(v)); sd.innerText=sc;}}
+        function sLn(){if(sc&&sc>0){let v=parseFloat(sc); sc=String(Math.log(v)); sd.innerText=sc;}}
+        function sLog(){if(sc&&sc>0){let v=parseFloat(sc); sc=String(Math.log10(v)); sd.innerText=sc;}}
+        function sPi(){sc=String(Math.PI); sd.innerText=sc;}
+        function sRand(){sc=String(Math.random()); sd.innerText=sc;}
+        function sFact(){if(sc){let n=parseInt(sc),f=1; for(let i=1;i<=n;i++)f*=i; sc=String(f); sd.innerText=sc;}}
+        function sExp(){if(sc){let v=parseFloat(sc); sc=String(Math.exp(v)); sd.innerText=sc;}}
+        function sTen(){if(sc){let v=parseFloat(sc); sc=String(Math.pow(10,v)); sd.innerText=sc;}}
+        function sSqrt2(){if(sc){let v=parseFloat(sc); sc=String(Math.pow(v,1/2)); sd.innerText=sc;}}
+        function sSqrt3(){if(sc){let v=parseFloat(sc); sc=String(Math.pow(v,1/3)); sd.innerText=sc;}}
+        function sPower(){sc+='^'; sd.innerText=sc;}
+        function sMC(){}
+        function sMplus(){}
+        function sMminus(){}
+        function sSinh(){if(sc){let v=parseFloat(sc); sc=String(Math.sinh(v)); sd.innerText=sc;}}
+        function sCosh(){if(sc){let v=parseFloat(sc); sc=String(Math.cosh(v)); sd.innerText=sc;}}
+        function sTanh(){if(sc){let v=parseFloat(sc); sc=String(Math.tanh(v)); sd.innerText=sc;}}
+    </script>
+</body>
+</html>

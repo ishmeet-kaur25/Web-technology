@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 350px;
+            margin: 50px auto;
+            text-align: center;
+            background: linear-gradient(135deg, #f6d5f7 0%, #fbe9d2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #6b4e71;  /* Dark purple for contrast */
+            font-size: 32px;
+            margin-top: 0;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border: 2px solid #b39eb5;  /* Soft purple border */
+            border-radius: 10px;
+            background: white;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #8f6b9a;  /* Darker purple */
+            box-shadow: 0 0 0 3px rgba(143, 107, 154, 0.2);
+        }
+        p {
+            color: #5d4a63;  /* Dark purple text */
+            font-size: 20px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.7);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #b39eb5;
+        }
+        button {
+            width: 70px;
+            height: 70px;
+            font-size: 24px;
+            margin: 8px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-3px);
+        }
+        .operator {
+            background: #8f6b9a;  /* Dark purple */
+            color: white;
+        }
+        .operator:hover {
+            background: #a885b3;
+        }
+        .clear {
+            background: #e8b4b4;  /* Soft pink */
+            color: #6b4e71;
+            width: 160px;
+            font-weight: bold;
+        }
+        .clear:hover {
+            background: #f2c6c6;
+        }
+    </style>
+</head>
+<body>
+    <h2> Simple Calculator </h2>
+    <input type="text" id="num1" placeholder="Enter first number">
+    <input type="text" id="num2" placeholder="Enter second number">
+    <p id="result">Result: </p>
+    
+    <button class="operator" onclick="calculate('+')">+</button>
+    <button class="operator" onclick="calculate('-')">-</button>
+    <button class="operator" onclick="calculate('*')">×</button>
+    <button class="operator" onclick="calculate('/')">÷</button>
+    <br>
+    <button class="clear" onclick="clearAll()">Clear</button>
+
+    <script>
+        function calculate(operator) {
+            let a = Number(document.getElementById('num1').value);
+            let b = Number(document.getElementById('num2').value);
+            let answer;
+            
+            if (operator == '+') {
+                answer = a + b;
+            }
+            else if (operator == '-') {
+                answer = a - b;
+            }
+            else if (operator == '*') {
+                answer = a * b;
+            }
+            else if (operator == '/') {
+                answer = a / b;
+            }
+            
+            document.getElementById('result').innerHTML = "Result: " + answer;
+        }
+        
+        function clearAll() {
+            document.getElementById('num1').value = '';
+            document.getElementById('num2').value = '';
+            document.getElementById('result').innerHTML = "Result: ";
+        }
+    </script>
+</body>
+</html>
