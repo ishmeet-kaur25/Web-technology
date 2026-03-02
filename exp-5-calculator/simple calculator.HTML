@@ -2,47 +2,81 @@
 <html>
 <head>
     <title>Simple Calculator</title>
-    <style>
+<style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             max-width: 350px;
             margin: 50px auto;
             text-align: center;
-            background: linear-gradient(135deg, #f6d5f7 0%, #fbe9d2 100%);
+            background: linear-gradient(135deg, #1a2634 0%, #0f1a24 100%);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,215,0,0.2) inset;
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* Light effect overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 60%);
+            animation: lightPulse 8s infinite alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes lightPulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0.6; }
+        }
+        
         h2 {
-            color: #6b4e71;  /* Dark purple for contrast */
+            color: #ffd700;
             font-size: 32px;
             margin-top: 0;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            text-shadow: 0 0 15px rgba(255,215,0,0.5);
+            position: relative;
+            z-index: 1;
         }
+        
         input {
             width: 100%;
             padding: 15px;
             font-size: 18px;
             margin-bottom: 15px;
-            border: 2px solid #b39eb5;  /* Soft purple border */
+            border: 2px solid #ffd700;
             border-radius: 10px;
-            background: white;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
             box-sizing: border-box;
+            color: white;
+            box-shadow: 0 0 20px rgba(255,215,0,0.2);
+            transition: all 0.3s;
         }
+        
         input:focus {
             outline: none;
-            border-color: #8f6b9a;  /* Darker purple */
-            box-shadow: 0 0 0 3px rgba(143, 107, 154, 0.2);
+            border-color: #ffd700;
+            box-shadow: 0 0 25px rgba(255,215,0,0.5);
+            background: rgba(255,255,255,0.15);
         }
+        
         p {
-            color: #5d4a63;  /* Dark purple text */
+            color: white;
             font-size: 20px;
             font-weight: bold;
-            background: rgba(255,255,255,0.7);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
             padding: 10px;
             border-radius: 10px;
-            border: 1px solid #b39eb5;
+            border: 1px solid rgba(255,215,0,0.3);
+            box-shadow: 0 0 15px rgba(255,215,0,0.2);
         }
+        
         button {
             width: 70px;
             height: 70px;
@@ -52,27 +86,51 @@
             border-radius: 15px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,215,0,0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
         button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.4), 0 0 0 1px rgba(255,215,0,0.5);
         }
+        
+        button:hover::before {
+            opacity: 1;
+        }
+        
         .operator {
-            background: #8f6b9a;  /* Dark purple */
-            color: white;
+            background: linear-gradient(135deg, #ffd700, #d4a500);
+            color: #1a1a1a;
         }
+        
         .operator:hover {
-            background: #a885b3;
+            background: linear-gradient(135deg, #ffe44d, #ffd700);
         }
+        
         .clear {
-            background: #e8b4b4;  /* Soft pink */
-            color: #6b4e71;
+            background: linear-gradient(135deg, #7f8c8d, #5f6b6c);
+            color: white;
             width: 160px;
             font-weight: bold;
         }
+        
         .clear:hover {
-            background: #f2c6c6;
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
         }
     </style>
 </head>

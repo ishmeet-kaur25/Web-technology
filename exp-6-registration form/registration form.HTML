@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration & Login Forms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at 20% 30%, #2b1b3a 0%, #0a0515 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated floating particles - removed dots */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: none;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* Glass morphism container */
+        .container {
+            background: rgba(20, 12, 30, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 35px;
+            border-radius: 40px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 215, 0, 0.2) inset,
+                0 0 40px rgba(147, 112, 219, 0.3);
+            width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glass shine effect */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: skewX(-20deg);
+            animation: shine 8s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        /* Custom scrollbar */
+        .container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #b19cd9, #6a4e9b);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 32px;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ccc;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .tab-btn:hover::before {
+            left: 100%;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #b794f4, #6b46c1);
+            color: white;
+            box-shadow: 0 0 30px rgba(147, 112, 219, 0.6);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e0e0e0;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            font-style: italic;
+        }
+
+        .radio-group, .age-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 15px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .radio-option, .age-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ddd;
+        }
+
+        .radio-option input, .age-option input {
+            width: auto;
+            accent-color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 15px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 45%;
+            color: #ddd;
+        }
+
+        .checkbox-option input {
+            width: auto;
+            accent-color: #b794f4;
+        }
+
+        .error {
+            color: #ff8a8a;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+            text-shadow: 0 0 5px rgba(255, 138, 138, 0.3);
+        }
+
+        button[type="button"] {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #b794f4, #6b46c1);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(107, 70, 193, 0.4);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        button[type="button"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        button[type="button"]:hover::before {
+            left: 100%;
+        }
+
+        button[type="button"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(107, 70, 193, 0.6);
+        }
+
+        .success {
+            color: #98fb98;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(152, 251, 152, 0.3);
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .switch-link {
+            text-align: center;
+            margin: 20px 0 10px;
+            color: #bbb;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 5px;
+        }
+
+        .switch-link:hover {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .saved-data {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .saved-data h3 {
+            color: #ffd700;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Horizontal scroll with glass style */
+        .data-scroll-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 15px 5px;
+            margin-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #b794f4 #2a1e3a;
+            border-radius: 50px;
+        }
+
+        .data-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .data-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .data-scroll-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #b794f4, #ffd700);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .data-row {
+            display: inline-flex;
+            gap: 15px;
+            flex-wrap: nowrap;
+        }
+
+        .data-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 22px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            border-left: 4px solid #ffd700;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .data-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .data-label {
+            font-weight: bold;
+            color: #ffd700;
+            font-size: 13px;
+            margin-right: 8px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+        }
+
+        .data-value {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .full-width-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 22px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            border-left: 4px solid #b794f4;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .full-width-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .use-data-btn, .copy-all-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .use-data-btn {
+            background: linear-gradient(135deg, #48bb78, #2f855a);
+            color: white;
+            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.4);
+        }
+
+        .copy-all-btn {
+            background: linear-gradient(135deg, #4299e1, #2b6cb0);
+            color: white;
+            box-shadow: 0 5px 20px rgba(66, 153, 225, 0.4);
+        }
+
+        .use-data-btn:hover, .copy-all-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+            box-shadow: 0 10px 30px currentColor;
+        }
+
+        .no-data {
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+        }
+
+        .copy-message {
+            color: #ffd700;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📝 Registration & Login Forms</h2>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showForm('register')">Register</button>
+            <button class="tab-btn" onclick="showForm('login')">Login</button>
+        </div>
+        
+        <!-- Registration Form -->
+        <div id="registerForm" class="form active">
+            <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" id="regName" placeholder="Enter your full name">
+                <div class="error" id="nameError">Name must be at least 3 characters</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Email *</label>
+                <input type="email" id="regEmail" placeholder="Enter your email">
+                <div class="error" id="emailError">Enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Password *</label>
+                <input type="password" id="regPassword" placeholder="Enter password">
+                <div class="error" id="passError">Password must be at least 6 characters</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Confirm Password *</label>
+                <input type="password" id="regConfirm" placeholder="Confirm password">
+                <div class="error" id="confirmError">Passwords do not match</div>
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth *</label>
+                <input type="date" id="regDob">
+                <div class="error" id="dobError">Please select your date of birth</div>
+            </div>
+
+            <div class="form-group">
+                <label>Age Group *</label>
+                <div class="age-group">
+                    <div class="age-option"><input type="radio" name="ageGroup" id="age18_25" value="18-25 years"><label for="age18_25">18-25</label></div>
+                    <div class="age-option"><input type="radio" name="ageGroup" id="age26_35" value="26-35 years"><label for="age26_35">26-35</label></div>
+                    <div class="age-option"><input type="radio" name="ageGroup" id="age36_45" value="36-45 years"><label for="age36_45">36-45</label></div>
+                    <div class="age-option"><input type="radio" name="ageGroup" id="age46_60" value="46-60 years"><label for="age46_60">46-60</label></div>
+                    <div class="age-option"><input type="radio" name="ageGroup" id="age60plus" value="60+ years"><label for="age60plus">60+</label></div>
+                </div>
+                <div class="error" id="ageError">Please select your age group</div>
+            </div>
+
+            <div class="form-group">
+                <label>Gender *</label>
+                <div class="radio-group">
+                    <div class="radio-option"><input type="radio" name="gender" id="male" value="Male"><label for="male">Male</label></div>
+                    <div class="radio-option"><input type="radio" name="gender" id="female" value="Female"><label for="female">Female</label></div>
+                    <div class="radio-option"><input type="radio" name="gender" id="other" value="Other"><label for="other">Other</label></div>
+                </div>
+                <div class="error" id="genderError">Please select your gender</div>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="regPhone" placeholder="Enter your phone number">
+                <div class="error" id="phoneError">Enter a valid 10-digit phone number</div>
+            </div>
+
+            <div class="form-group">
+                <label>Address</label>
+                <textarea id="regAddress" rows="2" placeholder="Enter your full address"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" id="regCity" placeholder="Enter your city">
+            </div>
+
+            <div class="form-group">
+                <label>State</label>
+                <select id="regState">
+                    <option value="">Select State</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Pincode</label>
+                <input type="text" id="regPincode" placeholder="Enter pincode">
+                <div class="error" id="pincodeError">Enter a valid 6-digit pincode</div>
+            </div>
+
+            <div class="form-group">
+                <label>Education</label>
+                <select id="regEducation">
+                    <option value="">Select Education</option>
+                    <option value="High School">High School</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Bachelor's">Bachelor's Degree</option>
+                    <option value="Master's">Master's Degree</option>
+                    <option value="PhD">PhD</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Skills/Interests</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option"><input type="checkbox" id="skill1" value="Coding"><label for="skill1">Coding</label></div>
+                    <div class="checkbox-option"><input type="checkbox" id="skill2" value="Reading"><label for="skill2">Reading</label></div>
+                    <div class="checkbox-option"><input type="checkbox" id="skill3" value="Sports"><label for="skill3">Sports</label></div>
+                    <div class="checkbox-option"><input type="checkbox" id="skill4" value="Music"><label for="skill4">Music</label></div>
+                    <div class="checkbox-option"><input type="checkbox" id="skill5" value="Travel"><label for="skill5">Travel</label></div>
+                    <div class="checkbox-option"><input type="checkbox" id="skill6" value="Art"><label for="skill6">Art</label></div>
+                </div>
+            </div>
+            
+            <button type="button" onclick="validateRegister()">Register Now</button>
+            <div class="success" id="regSuccess">✅ Registration successful!</div>
+        </div>
+        
+        <!-- Login Form -->
+        <div id="loginForm" class="form">
+            <div class="form-group">
+                <label>Email *</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+                <div class="error" id="loginEmailError">Email not registered</div>
+            </div>
+            <div class="form-group">
+                <label>Password *</label>
+                <input type="password" id="loginPassword" placeholder="Enter password">
+                <div class="error" id="loginPassError">Incorrect password</div>
+            </div>
+            <button type="button" onclick="validateLogin()">Login</button>
+            <div class="success" id="loginSuccess">✅ Login successful!</div>
+        </div>
+        
+        <div class="switch-link" id="switchLink" onclick="switchForm()">Already have an account? Login here</div>
+        
+        <!-- Saved Data Section -->
+        <div class="saved-data">
+            <h3>Previously Saved Data</h3>
+            <div id="savedDataContainer">
+                <div class="no-data">No saved data yet. Register first!</div>
+            </div>
+            <div class="button-group">
+                <button class="use-data-btn" onclick="useSavedData()">Use Previous Data</button>
+                <button class="copy-all-btn" onclick="copyAllData()">Copy All Data</button>
+            </div>
+            <div class="copy-message" id="copyMessage">✅ All data copied to clipboard!</div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() { displaySavedData(); };
+        
+        function displaySavedData() {
+            let savedData = JSON.parse(localStorage.getItem('userData')) || {};
+            let container = document.getElementById('savedDataContainer');
+            
+            if (savedData.email) {
+                let skills = savedData.skills ? savedData.skills.join(', ') : 'None';
+                container.innerHTML = `
+                    <div class="data-scroll-container">
+                        <div class="data-row">
+                            <div class="data-item"><span class="data-label">Name:</span><span class="data-value">${savedData.name || ''}</span></div>
+                            <div class="data-item"><span class="data-label">Email:</span><span class="data-value">${savedData.email}</span></div>
+                            <div class="data-item"><span class="data-label">DOB:</span><span class="data-value">${savedData.dob || ''}</span></div>
+                            <div class="data-item"><span class="data-label">Age:</span><span class="data-value">${savedData.age || ''}</span></div>
+                            <div class="data-item"><span class="data-label">Gender:</span><span class="data-value">${savedData.gender || ''}</span></div>
+                            <div class="data-item"><span class="data-label">Phone:</span><span class="data-value">${savedData.phone || ''}</span></div>
+                            <div class="data-item"><span class="data-label">City:</span><span class="data-value">${savedData.city || ''}</span></div>
+                            <div class="data-item"><span class="data-label">State:</span><span class="data-value">${savedData.state || ''}</span></div>
+                            <div class="data-item"><span class="data-label">Pincode:</span><span class="data-value">${savedData.pincode || ''}</span></div>
+                            <div class="data-item"><span class="data-label">Education:</span><span class="data-value">${savedData.education || ''}</span></div>
+                            <div class="full-width-item"><span class="data-label">Address:</span><span class="data-value">${savedData.address || ''}</span></div>
+                            <div class="full-width-item"><span class="data-label">Skills:</span><span class="data-value">${skills}</span></div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '<div class="no-data">No saved data yet. Register first!</div>';
+            }
+        }
+        
+        function copyAllData() {
+            let savedData = JSON.parse(localStorage.getItem('userData')) || {};
+            if (savedData.email) {
+                let skills = savedData.skills ? savedData.skills.join(', ') : 'None';
+                let textToCopy = `NAME: ${savedData.name}\nEMAIL: ${savedData.email}\nDOB: ${savedData.dob}\nAGE: ${savedData.age}\nGENDER: ${savedData.gender}\nPHONE: ${savedData.phone}\nADDRESS: ${savedData.address}\nCITY: ${savedData.city}\nSTATE: ${savedData.state}\nPINCODE: ${savedData.pincode}\nEDUCATION: ${savedData.education}\nSKILLS: ${skills}`;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    document.getElementById('copyMessage').style.display = 'block';
+                    setTimeout(() => document.getElementById('copyMessage').style.display = 'none', 2000);
+                });
+            }
+        }
+        
+        function useSavedData() {
+            let savedData = JSON.parse(localStorage.getItem('userData')) || {};
+            if (savedData.email) {
+                if (document.getElementById('registerForm').classList.contains('active')) {
+                    document.getElementById('regName').value = savedData.name || '';
+                    document.getElementById('regEmail').value = savedData.email || '';
+                    document.getElementById('regDob').value = savedData.dob || '';
+                    document.getElementById('regPhone').value = savedData.phone || '';
+                    document.getElementById('regAddress').value = savedData.address || '';
+                    document.getElementById('regCity').value = savedData.city || '';
+                    document.getElementById('regState').value = savedData.state || '';
+                    document.getElementById('regPincode').value = savedData.pincode || '';
+                    document.getElementById('regEducation').value = savedData.education || '';
+                    
+                    if (savedData.gender) {
+                        let g = document.querySelector(`input[name="gender"][value="${savedData.gender}"]`);
+                        if (g) g.checked = true;
+                    }
+                    
+                    if (savedData.age) {
+                        let ageMap = {'18-25 years':'age18_25','26-35 years':'age26_35','36-45 years':'age36_45','46-60 years':'age46_60','60+ years':'age60plus'};
+                        let id = ageMap[savedData.age];
+                        if (id) document.getElementById(id).checked = true;
+                    }
+                } else {
+                    document.getElementById('loginEmail').value = savedData.email || '';
+                    document.getElementById('loginPassword').value = savedData.pass || '';
+                }
+                alert('Previous data loaded!');
+            }
+        }
+        
+        function showForm(form) {
+            document.getElementById('registerForm').classList.toggle('active', form === 'register');
+            document.getElementById('loginForm').classList.toggle('active', form === 'login');
+            document.querySelectorAll('.tab-btn')[0].classList.toggle('active', form === 'register');
+            document.querySelectorAll('.tab-btn')[1].classList.toggle('active', form === 'login');
+            document.getElementById('switchLink').innerHTML = form === 'register' ? "Already have an account? Login here" : "Don't have an account? Register here";
+        }
+        
+        function switchForm() {
+            showForm(document.getElementById('registerForm').classList.contains('active') ? 'login' : 'register');
+        }
+        
+        function validateRegister() {
+            let name = document.getElementById('regName').value;
+            let email = document.getElementById('regEmail').value;
+            let pass = document.getElementById('regPassword').value;
+            let confirm = document.getElementById('regConfirm').value;
+            let dob = document.getElementById('regDob').value;
+            let age = document.querySelector('input[name="ageGroup"]:checked');
+            let gender = document.querySelector('input[name="gender"]:checked');
+            let phone = document.getElementById('regPhone').value;
+            let pincode = document.getElementById('regPincode').value;
+            let skills = [];
+            document.querySelectorAll('#registerForm input[type="checkbox"]:checked').forEach(cb => skills.push(cb.value));
+            
+            document.querySelectorAll('.error').forEach(e => e.style.display = 'none');
+            document.getElementById('regSuccess').style.display = 'none';
+            
+            let isValid = true;
+            if (name.length < 3) { document.getElementById('nameError').style.display = 'block'; isValid = false; }
+            if (!email.includes('@') || !email.includes('.')) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
+            if (pass.length < 6) { document.getElementById('passError').style.display = 'block'; isValid = false; }
+            if (pass !== confirm) { document.getElementById('confirmError').style.display = 'block'; isValid = false; }
+            if (!dob) { document.getElementById('dobError').style.display = 'block'; isValid = false; }
+            if (!age) { document.getElementById('ageError').style.display = 'block'; isValid = false; }
+            if (!gender) { document.getElementById('genderError').style.display = 'block'; isValid = false; }
+            if (phone && !/^\d{10}$/.test(phone)) { document.getElementById('phoneError').style.display = 'block'; isValid = false; }
+            if (pincode && !/^\d{6}$/.test(pincode)) { document.getElementById('pincodeError').style.display = 'block'; isValid = false; }
+            
+            if (isValid) {
+                let userData = {
+                    name, email, pass, dob, age: age.value, gender: gender.value, phone,
+                    address: document.getElementById('regAddress').value,
+                    city: document.getElementById('regCity').value,
+                    state: document.getElementById('regState').value,
+                    pincode, education: document.getElementById('regEducation').value, skills
+                };
+                localStorage.setItem('userData', JSON.stringify(userData));
+                document.getElementById('regSuccess').style.display = 'block';
+                displaySavedData();
+                
+                document.getElementById('regName').value = '';
+                document.getElementById('regEmail').value = '';
+                document.getElementById('regPassword').value = '';
+                document.getElementById('regConfirm').value = '';
+                document.getElementById('regDob').value = '';
+                document.getElementById('regPhone').value = '';
+                document.getElementById('regAddress').value = '';
+                document.getElementById('regCity').value = '';
+                document.getElementById('regState').value = '';
+                document.getElementById('regPincode').value = '';
+                document.getElementById('regEducation').value = '';
+                document.querySelectorAll('input[name="gender"]').forEach(r => r.checked = false);
+                document.querySelectorAll('input[name="ageGroup"]').forEach(r => r.checked = false);
+                document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            }
+            return false;
+        }
+        
+        function validateLogin() {
+            let email = document.getElementById('loginEmail').value;
+            let pass = document.getElementById('loginPassword').value;
+            let savedData = JSON.parse(localStorage.getItem('userData')) || {};
+            
+            document.getElementById('loginEmailError').style.display = 'none';
+            document.getElementById('loginPassError').style.display = 'none';
+            document.getElementById('loginSuccess').style.display = 'none';
+            
+            if (email === savedData.email && pass === savedData.pass) {
+                document.getElementById('loginSuccess').style.display = 'block';
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                if (email !== savedData.email) document.getElementById('loginEmailError').style.display = 'block';
+                if (pass !== savedData.pass) document.getElementById('loginPassError').style.display = 'block';
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>

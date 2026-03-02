@@ -2,121 +2,169 @@
 <html>
 <head>
     <title>Calculator</title>
-    <style>
-        *{box-sizing:border-box;margin:0}
-        body{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            min-height:100vh;
-            background:linear-gradient(135deg,#4d2e1b 0%,#080808 100%);
-            font-family:system-ui,sans-serif;
-            padding:20px;
-        }
-        .container{
-            display:flex;
-            gap:40px;
-            flex-wrap:wrap;
-            justify-content:center;
-        }
-        .calculator{
-            width:340px;
-            background:#1a120b;
-            padding:15px;
-            border-radius:30px;
-            box-shadow:0 20px 40px rgba(212,124,58,0.3);
-            border:1px solid #d47c3a30;
-        }
-        .title{
-            color:#f09b4a;
-            text-align:center;
-            margin-bottom:8px;
-            font-size:18px;
-            font-weight:bold;
-        }
-        .display{
-            height:60px;
-            background:#2a1e14;
-            color:#ffb366;
-            font-size:36px;
-            text-align:right;
-            padding:5px 15px;
-            line-height:60px;
-            margin-bottom:15px;
-            border-radius:15px;
-            border:1px solid #d47c3a;
-        }
-        .sci-rows{
-            display:flex;
-            flex-direction:column;
-            gap:5px;
-            margin-bottom:15px;
-        }
-        .sci-row{
-            display:grid;
-            grid-template-columns:repeat(5,1fr);
-            gap:4px;
-        }
-        .sci-btn{
-            background:#d47c3a;
-            color:white;
-            border:none;
-            border-radius:15px;
-            height:35px;
-            font-size:12px;
-            cursor:pointer;
-            font-weight:600;
-            box-shadow:0 2px 4px rgba(0,0,0,0.3);
-        }
-        .sci-btn:hover{background:#e68a48}
-        .buttons{
-            display:grid;
-            grid-template-columns:repeat(4,1fr);
-            gap:8px;
-        }
-        button{
-            height:55px;
-            border:none;
-            border-radius:25px;
-            font-size:20px;
-            cursor:pointer;
-            font-weight:600;
-            transition:0.2s;
-            box-shadow:0 4px 6px rgba(0,0,0,0.3);
-        }
-        button:hover{transform:translateY(-2px);filter:brightness(110%)}
-        .num{
-            background:#3a2a1f;
-            color:#ffb366;
-            border-bottom:3px solid #d47c3a;
-        }
-        .num:hover{background:#4d382a}
-        .operator{
-            background:#f09b4a;
-            color:#1a120b;
-            font-size:24px;
-            border-bottom:3px solid #b86b2e;
-        }
-        .func{
-            background:#b86b2e;
-            color:white;
-            border-bottom:3px solid #8a4f22;
-        }
-        .zero{grid-column:span 2}
-        .equal{
-            background:#ffa54d;
-            color:#1a120b;
-            border-bottom:3px solid #cc823d;
-        }
-        [style*="grid-template-columns: repeat(6, 1fr)"]{margin-bottom:2px}
-    </style>
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    font-family:'Segoe UI',system-ui,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f2b2d,#1a3f42);
+    padding:20px;
+}
+
+.container{
+    display:flex;
+    gap:100px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.calculator{
+    width:300px;
+    padding:15px;
+    border-radius:25px;
+    background:linear-gradient(145deg,#115e5f,#0a4849);
+    box-shadow:15px 15px 30px #052b2c,
+               -10px -10px 20px #1c7a7b;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:12px;
+    font-size:16px;
+    font-weight:500;
+    letter-spacing:1px;
+    color:#ffd6a8;
+    text-shadow:0 2px 4px rgba(0,0,0,0.3);
+}
+
+.display{
+    min-height:70px;
+    background:linear-gradient(145deg,#0d5c5d,#094445);
+    color:#ffeac2;
+    font-size:22px;
+    text-align:right;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:12px;
+    box-shadow:inset 5px 5px 8px #053334,
+               inset -5px -5px 8px #157273;
+}
+
+.expr{
+    font-size:12px;
+    color:#ffcda1;
+    min-height:18px;
+    font-weight:400;
+}
+
+.result{
+    font-size:24px;
+    font-weight:600;
+    color:#fff2d8;
+}
+
+.sci-rows{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:15px;
+}
+
+.sci-row{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:5px;
+}
+
+.sci-btn{
+    background:linear-gradient(145deg,#1b7273,#115a5b);
+    color:#ffdbb5;
+    border:none;
+    border-radius:10px;
+    height:32px;
+    font-size:11px;
+    cursor:pointer;
+    font-weight:500;
+    box-shadow:4px 4px 6px #094445,
+               -3px -3px 5px #26898a;
+    transition:0.2s;
+}
+
+.sci-btn:hover{
+    background:linear-gradient(145deg,#21898a,#166b6c);
+    transform:translateY(-2px);
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+}
+
+button{
+    height:50px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow:5px 5px 8px #094445,
+               -4px -4px 6px #1e8081;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.1);
+}
+
+.num{
+    background:linear-gradient(145deg,#1b7273,#115a5b);
+    color:#fff0da;
+}
+
+.operator{
+    background:linear-gradient(145deg,#f28c38,#d9651e);
+    color:white;
+    font-weight:700;
+}
+
+.func{
+    background:linear-gradient(145deg,#c7572a,#a33f1a);
+    color:white;
+}
+
+.zero{
+    grid-column:span 2;
+}
+
+.equal{
+    background:linear-gradient(145deg,#f28c38,#d9651e);
+    color:white;
+    font-weight:700;
+}
+
+[style*="grid-template-columns: repeat(6, 1fr)"]{
+    margin-bottom:6px;
+}
+</style>
 </head>
 <body>
     <div class="container">
         <!-- LEFT: Normal Calculator -->
         <div class="calculator">
             <div class="title">NORMAL</div>
-            <div class="display" id="normalDisplay">0</div>
+            <div class="display">
+                <div class="expr" id="normalExpr"></div>
+                <div class="result" id="normalResult">0</div>
+            </div>
             <div class="buttons">
                 <button class="func" onclick="nClear()">C</button>
                 <button class="func" onclick="nPlusMinus()">+/-</button>
@@ -143,7 +191,10 @@
         <!-- RIGHT: Scientific Calculator -->
         <div class="calculator">
             <div class="title">SCIENTIFIC</div>
-            <div class="display" id="sciDisplay">0</div>
+            <div class="display">
+                <div class="expr" id="sciExpr"></div>
+                <div class="result" id="sciResult">0</div>
+            </div>
             
             <div class="sci-rows">
                 <div class="sci-row">
@@ -203,66 +254,187 @@
                 <button class="num" onclick="sAdd(1)">1</button>
                 <button class="num" onclick="sAdd(2)">2</button>
                 <button class="num" onclick="sAdd(3)">3</button>
-                <button class="operator" onclick="sOp('=')" style="background:#f09b4a">=</button>
+                <button class="operator" onclick="sOp('=')" style="background:#27ae60;color:white;">=</button>
                 <button class="func" onclick="sPlusMinus()">+/−</button>
                 <button class="num zero" onclick="sAdd(0)">0</button>
                 <button class="num" onclick="sAdd('.')">.</button>
-                <button class="equal" onclick="sCalc()">=</button>
             </div>
         </div>
     </div>
 
     <script>
         // Normal calculator
-        let nd=document.getElementById('normalDisplay'), nc='', np='', no=null;
-        function nAdd(x){if(x=='.'&&nc.includes('.'))return; nc+=x; nd.innerText=nc;}
-        function nOp(o){if(nc==='')return; np=nc; nc=''; no=o;}
+        let nd=document.getElementById('normalResult');
+        let ne=document.getElementById('normalExpr');
+        let nc='', np='', no=null;
+        
+        function updateNormalDisplay(){
+            let expr='';
+            if(np) expr+=np;
+            if(no){
+                if(no=='+') expr+=' + ';
+                else if(no=='-') expr+=' - ';
+                else if(no=='*') expr+=' × ';
+                else if(no=='/') expr+=' ÷ ';
+            }
+            if(nc) expr+=nc;
+            ne.innerText=expr;
+            nd.innerText=nc||np||'0';
+        }
+        
+        function nAdd(x){
+            if(x=='.'&&nc.includes('.'))return;
+            nc+=x; 
+            updateNormalDisplay();
+        }
+        function nOp(o){
+            if(nc===''&&np==='')return;
+            if(nc!==''){np=nc; nc='';}
+            no=o;
+            updateNormalDisplay();
+        }
         function nCalc(){
             if(np===''||nc===''||no===null)return;
             let a=Number(np), b=Number(nc), r;
-            if(no=='+')r=a+b; else if(no=='-')r=a-b; else if(no=='*')r=a*b; else if(no=='/')r=a/b;
-            nd.innerText=r; nc=r; np=''; no=null;
+            if(no=='+')r=a+b; 
+            else if(no=='-')r=a-b; 
+            else if(no=='*')r=a*b; 
+            else if(no=='/')r=a/b;
+            let expr=np+' '+no+' '+nc+' =';
+            ne.innerText=expr;
+            nd.innerText=r;
+            nc=String(r); np=''; no=null;
         }
-        function nClear(){nc=''; np=''; no=null; nd.innerText='0';}
-        function nPlusMinus(){if(nc!==''){nc=String(-parseFloat(nc)); nd.innerText=nc;}}
-        function nPercent(){if(nc!==''){nc=String(parseFloat(nc)/100); nd.innerText=nc;}}
+        function nClear(){
+            nc=''; np=''; no=null; 
+            ne.innerText=''; nd.innerText='0';
+        }
+        function nPlusMinus(){
+            if(nc!==''){nc=String(-parseFloat(nc)); updateNormalDisplay();}
+        }
+        function nPercent(){
+            if(nc!==''){nc=String(parseFloat(nc)/100); updateNormalDisplay();}
+        }
 
         // Scientific calculator
-        let sd=document.getElementById('sciDisplay'), sc='', sp='', so=null;
-        function sAdd(x){if(x=='.'&&sc.includes('.'))return; sc+=x; sd.innerText=sc;}
-        function sClear(){sc=''; sp=''; so=null; sd.innerText='0';}
-        function sPercent(){if(sc!==''){sc=String(parseFloat(sc)/100); sd.innerText=sc;}}
-        function sPlusMinus(){if(sc!==''){sc=String(-parseFloat(sc)); sd.innerText=sc;}}
-        function sOp(o){if(o==='='){sCalc(); return;} if(sc==='')return; sp=sc; sc=''; so=o;}
+        let sd=document.getElementById('sciResult');
+        let se=document.getElementById('sciExpr');
+        let sc='', sp='', so=null;
+        
+        function updateSciDisplay(){
+            let expr='';
+            if(sp) expr+=sp;
+            if(so){
+                if(so=='+') expr+=' + ';
+                else if(so=='-') expr+=' - ';
+                else if(so=='*') expr+=' × ';
+                else if(so=='/') expr+=' ÷ ';
+            }
+            if(sc) expr+=sc;
+            se.innerText=expr;
+            sd.innerText=sc||sp||'0';
+        }
+        
+        function sAdd(x){
+            if(x=='.'&&sc.includes('.'))return;
+            sc+=x; 
+            updateSciDisplay();
+        }
+        function sClear(){
+            sc=''; sp=''; so=null; 
+            se.innerText=''; sd.innerText='0';
+        }
+        function sPercent(){
+            if(sc!==''){sc=String(parseFloat(sc)/100); updateSciDisplay();}
+        }
+        function sPlusMinus(){
+            if(sc!==''){sc=String(-parseFloat(sc)); updateSciDisplay();}
+        }
+        function sOp(o){
+            if(o==='='){sCalc(); return;}
+            if(sc===''&&sp==='')return;
+            if(sc!==''){sp=sc; sc='';}
+            so=o;
+            updateSciDisplay();
+        }
         function sCalc(){
             if(sp===''||sc===''||so===null)return;
             let a=Number(sp), b=Number(sc), r;
-            if(so=='+')r=a+b; else if(so=='-')r=a-b; else if(so=='*')r=a*b; else if(so=='/')r=a/b;
-            sd.innerText=r; sc=r; sp=''; so=null;
+            if(so=='+')r=a+b; 
+            else if(so=='-')r=a-b; 
+            else if(so=='*')r=a*b; 
+            else if(so=='/')r=a/b;
+            let expr=sp+' '+so+' '+sc+' =';
+            se.innerText=expr;
+            sd.innerText=r;
+            sc=String(r); sp=''; so=null;
         }
-        function sSquare(){if(sc){let v=parseFloat(sc); sc=String(v*v); sd.innerText=sc;}}
-        function sCube(){if(sc){let v=parseFloat(sc); sc=String(v*v*v); sd.innerText=sc;}}
-        function sSqrt(){if(sc){let v=parseFloat(sc); sc=String(Math.sqrt(v)); sd.innerText=sc;}}
-        function sRecip(){if(sc&&sc!='0'){let v=parseFloat(sc); sc=String(1/v); sd.innerText=sc;}}
-        function sSin(){if(sc){let v=parseFloat(sc); sc=String(Math.sin(v)); sd.innerText=sc;}}
-        function sCos(){if(sc){let v=parseFloat(sc); sc=String(Math.cos(v)); sd.innerText=sc;}}
-        function sTan(){if(sc){let v=parseFloat(sc); sc=String(Math.tan(v)); sd.innerText=sc;}}
-        function sLn(){if(sc&&sc>0){let v=parseFloat(sc); sc=String(Math.log(v)); sd.innerText=sc;}}
-        function sLog(){if(sc&&sc>0){let v=parseFloat(sc); sc=String(Math.log10(v)); sd.innerText=sc;}}
-        function sPi(){sc=String(Math.PI); sd.innerText=sc;}
-        function sRand(){sc=String(Math.random()); sd.innerText=sc;}
-        function sFact(){if(sc){let n=parseInt(sc),f=1; for(let i=1;i<=n;i++)f*=i; sc=String(f); sd.innerText=sc;}}
-        function sExp(){if(sc){let v=parseFloat(sc); sc=String(Math.exp(v)); sd.innerText=sc;}}
-        function sTen(){if(sc){let v=parseFloat(sc); sc=String(Math.pow(10,v)); sd.innerText=sc;}}
-        function sSqrt2(){if(sc){let v=parseFloat(sc); sc=String(Math.pow(v,1/2)); sd.innerText=sc;}}
-        function sSqrt3(){if(sc){let v=parseFloat(sc); sc=String(Math.pow(v,1/3)); sd.innerText=sc;}}
-        function sPower(){sc+='^'; sd.innerText=sc;}
+        
+        // Scientific functions
+        function sSquare(){
+            if(sc){let v=parseFloat(sc); sc=String(v*v); se.innerText=`sqr(${v})`; sd.innerText=sc;}
+        }
+        function sCube(){
+            if(sc){let v=parseFloat(sc); sc=String(v*v*v); se.innerText=`cube(${v})`; sd.innerText=sc;}
+        }
+        function sSqrt(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.sqrt(v)); se.innerText=`√(${v})`; sd.innerText=sc;}
+        }
+        function sRecip(){
+            if(sc&&sc!='0'){let v=parseFloat(sc); sc=String(1/v); se.innerText=`1/(${v})`; sd.innerText=sc;}
+        }
+        function sSin(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.sin(v)); se.innerText=`sin(${v})`; sd.innerText=sc;}
+        }
+        function sCos(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.cos(v)); se.innerText=`cos(${v})`; sd.innerText=sc;}
+        }
+        function sTan(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.tan(v)); se.innerText=`tan(${v})`; sd.innerText=sc;}
+        }
+        function sLn(){
+            if(sc&&sc>0){let v=parseFloat(sc); sc=String(Math.log(v)); se.innerText=`ln(${v})`; sd.innerText=sc;}
+        }
+        function sLog(){
+            if(sc&&sc>0){let v=parseFloat(sc); sc=String(Math.log10(v)); se.innerText=`log(${v})`; sd.innerText=sc;}
+        }
+        function sPi(){
+            sc=String(Math.PI); se.innerText='π'; sd.innerText=sc;
+        }
+        function sRand(){
+            sc=String(Math.random()); se.innerText='rand()'; sd.innerText=sc;
+        }
+        function sFact(){
+            if(sc){let n=parseInt(sc),f=1; for(let i=1;i<=n;i++)f*=i; 
+            se.innerText=`${n}!`; sc=String(f); sd.innerText=sc;}
+        }
+        function sExp(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.exp(v)); se.innerText=`exp(${v})`; sd.innerText=sc;}
+        }
+        function sTen(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.pow(10,v)); se.innerText=`10^${v}`; sd.innerText=sc;}
+        }
+        function sSqrt2(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.pow(v,1/2)); se.innerText=`²√(${v})`; sd.innerText=sc;}
+        }
+        function sSqrt3(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.pow(v,1/3)); se.innerText=`³√(${v})`; sd.innerText=sc;}
+        }
+        function sPower(){
+            sc+='^'; updateSciDisplay();
+        }
+        function sSinh(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.sinh(v)); se.innerText=`sinh(${v})`; sd.innerText=sc;}
+        }
+        function sCosh(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.cosh(v)); se.innerText=`cosh(${v})`; sd.innerText=sc;}
+        }
+        function sTanh(){
+            if(sc){let v=parseFloat(sc); sc=String(Math.tanh(v)); se.innerText=`tanh(${v})`; sd.innerText=sc;}
+        }
         function sMC(){}
         function sMplus(){}
         function sMminus(){}
-        function sSinh(){if(sc){let v=parseFloat(sc); sc=String(Math.sinh(v)); sd.innerText=sc;}}
-        function sCosh(){if(sc){let v=parseFloat(sc); sc=String(Math.cosh(v)); sd.innerText=sc;}}
-        function sTanh(){if(sc){let v=parseFloat(sc); sc=String(Math.tanh(v)); sd.innerText=sc;}}
     </script>
 </body>
 </html>
