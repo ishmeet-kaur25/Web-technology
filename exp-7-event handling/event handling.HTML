@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student & Market System</title>
+
+<style>
+/* Global */
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #f0f0f0;
+    margin:0;
+}
+
+/* Container */
+.container{
+    width:80%;
+    margin:40px auto;
+    background:#1e1e1e;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.7);
+    text-align:center;
+    transition:0.3s;
+}
+.container:hover{
+    transform: translateY(-2px);
+}
+
+/* Top controls */
+.top-controls{
+    margin-bottom:25px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+input, select{
+    padding:10px 14px;
+    border-radius:8px;
+    border:1px solid #555;
+    background:#2c2c2c;
+    color:#f0f0f0;
+    outline:none;
+    transition:0.3s;
+}
+input:focus, select:focus{
+    border-color:#00bfa5;
+    box-shadow:0 0 10px rgba(0,191,165,0.4);
+}
+
+/* Buttons */
+button{
+    padding:10px 20px;
+    margin:6px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,0.5);
+    color:white;
+}
+button:hover{
+    transform: translateY(-2px);
+    box-shadow:0 6px 14px rgba(0,0,0,0.7);
+}
+.downloadBtn{
+    background: linear-gradient(45deg,#ff6f00,#ffca28);
+    color:#121212;
+}
+button:not(.downloadBtn){
+    background: linear-gradient(45deg,#00796b,#004d40);
+}
+
+/* Headings */
+h2, h3{
+    margin-bottom:15px;
+    color:#00bfa5;
+}
+
+/* Section buttons */
+.section-btn {
+    background: linear-gradient(45deg,#673ab7,#512da8);
+    padding:12px 25px;
+    font-size:16px;
+    margin:10px;
+}
+
+.section-btn:hover {
+    background: linear-gradient(45deg,#7e57c2,#5e35b1);
+}
+
+/* Table */
+table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 6px 15px rgba(0,0,0,0.5);
+}
+th, td{
+    padding:12px;
+    border:1px solid #333;
+    text-align:center;
+    color:#f0f0f0;
+}
+th{
+    background: linear-gradient(45deg,#00796b,#004d40);
+}
+tr:nth-child(even){
+    background:#2c2c2c;
+}
+tr:hover{
+    background:#383838;
+    cursor:pointer;
+}
+
+/* Output container */
+#output{
+    margin-top:20px;
+    padding:15px;
+    border-radius:10px;
+    background:#1e1e1e;
+    min-height:120px;
+    transition:0.3s;
+    box-shadow:0 4px 15px rgba(0,0,0,0.5);
+}
+#output:hover{
+    box-shadow:0 6px 20px rgba(0,0,0,0.7);
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Section container */
+.section-container {
+    margin:20px 0;
+    padding:15px;
+    border-radius:10px;
+    background:#2a2a2a;
+}
+
+/* Welcome message */
+.welcome-message {
+    margin:30px 0;
+    padding:30px;
+    background:#2a2a2a;
+    border-radius:10px;
+    color:#00bfa5;
+    font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Student & Market System</h2>
+
+<div class="top-controls">
+    <button class="section-btn" onclick="showStudentSection()">📚 Student Section</button>
+    <button class="section-btn" onclick="showMarketSection()">🛒 Market Section</button>
+</div>
+
+<!-- Welcome Message (shown by default) -->
+<div id="welcomeMessage" class="welcome-message">
+    <p>👋 Welcome! Click on a section above to get started.</p>
+</div>
+
+<!-- Student Section (hidden by default) -->
+<div id="studentSection" class="section-container hidden">
+    <h3>Student Operations</h3>
+    <button onclick="showStudents()">Show Students</button>
+    <button onclick="marksAbove80()">Marks > 80</button>
+    <button onclick="countCourses()">Student Count Per Course</button>
+    <button onclick="printCSE()">Only CSE Students</button>
+    
+    <div class="top-controls" style="margin-top:20px;">
+        <input type="text" id="searchBox" placeholder="Search students..." onkeyup="searchData()">
+        <select id="courseFilter" onchange="filterCourse()">
+            <option value="ALL">All Courses</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="MECH">MECH</option>
+        </select>
+        <select id="sortOption">
+            <option value="">Sort By</option>
+            <option value="name">Name</option>
+            <option value="marks">Marks</option>
+            <option value="course">Course</option>
+        </select>
+        <button onclick="sortData()">Sort</button>
+    </div>
+</div>
+
+<!-- Market Section (hidden by default) -->
+<div id="marketSection" class="section-container hidden">
+    <h3>Market Products</h3>
+    <button onclick="showProducts()">Show Products</button>
+    <button onclick="totalValue()">Total Market Value</button>
+    
+    <div class="top-controls" style="margin-top:20px;">
+        <input type="text" id="marketSearchBox" placeholder="Search products..." onkeyup="searchMarketData()">
+        <select id="marketSortOption">
+            <option value="">Sort By</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+            <option value="quantity">Quantity</option>
+        </select>
+        <button onclick="sortMarketData()">Sort</button>
+    </div>
+</div>
+
+<br><br>
+<button class="downloadBtn" onclick="downloadData()">Download Data (CSV)</button>
+
+<div id="output"></div>
+</div>
+
+<script>
+let students=[
+{name:"Rahul",marks:85,course:"CSE"},
+{name:"Anita",marks:72,course:"ECE"},
+{name:"Kiran",marks:91,course:"CSE"},
+{name:"Priya",marks:67,course:"MECH"},
+{name:"Arjun",marks:88,course:"CSE"},
+{name:"Sneha",marks:79,course:"ECE"}
+];
+let products=[
+{name:"Rice",price:50,quantity:10},
+{name:"Milk",price:30,quantity:20},
+{name:"Bread",price:25,quantity:15},
+{name:"Eggs",price:6,quantity:50},
+{name:"Sugar",price:45,quantity:8}
+];
+let currentData=[];
+let mode=""; // "students", "products", "summary"
+
+// Show/hide sections
+function showStudentSection() {
+    // Hide welcome message
+    document.getElementById('welcomeMessage').classList.add('hidden');
+    // Show student section
+    document.getElementById('studentSection').classList.remove('hidden');
+    document.getElementById('marketSection').classList.add('hidden');
+    mode="students";
+    showStudents();
+}
+
+function showMarketSection() {
+    // Hide welcome message
+    document.getElementById('welcomeMessage').classList.add('hidden');
+    // Show market section
+    document.getElementById('marketSection').classList.remove('hidden');
+    document.getElementById('studentSection').classList.add('hidden');
+    mode="products";
+    showProducts();
+}
+
+// Render table
+function renderTable(data){
+let output=document.getElementById("output");
+if(data.length===0){
+output.innerHTML="No data";
+return;
+}
+let keys=Object.keys(data[0]);
+let html="<table><tr>";
+keys.forEach(k=>{ html+="<th>"+k.toUpperCase()+"</th>"; });
+html+="</tr>";
+data.forEach(row=>{
+html+="<tr>";
+keys.forEach(k=>{ html+="<td>"+row[k]+"</td>"; });
+html+="</tr>";
+});
+html+="</table>";
+output.innerHTML=html;
+}
+
+// Student functions
+function showStudents(){
+mode="students";
+currentData=[...students];
+renderTable(currentData);
+}
+function marksAbove80(){
+mode="students";
+currentData=students.filter(s=>s.marks>80);
+renderTable(currentData);
+}
+function printCSE(){
+mode="students";
+currentData=students.filter(s=>s.course==="CSE");
+renderTable(currentData);
+}
+function countCourses(){
+mode="summary";
+let count={};
+students.forEach(s=>{count[s.course]=(count[s.course]||0)+1;});
+currentData=[];
+for(let c in count){ currentData.push({Course:c,Count:count[c]}); }
+renderTable(currentData);
+}
+
+// Product functions
+function showProducts(){
+mode="products";
+currentData=[...products];
+renderTable(currentData);
+}
+function totalValue(){
+mode="summary";
+let total=products.reduce((sum,p)=>sum+(p.price*p.quantity),0);
+currentData=[{TotalMarketValue:"₹"+total}];
+renderTable(currentData);
+}
+
+// Student Search
+function searchData(){
+if(mode!=="students" && mode!=="summary") return;
+let text=document.getElementById("searchBox").value.toLowerCase();
+if(currentData.length===0) return;
+let filtered=currentData.filter(obj=>JSON.stringify(obj).toLowerCase().includes(text));
+renderTable(filtered);
+}
+
+// Market Search
+function searchMarketData(){
+if(mode!=="products") return;
+let text=document.getElementById("marketSearchBox").value.toLowerCase();
+if(currentData.length===0) return;
+let filtered=currentData.filter(obj=>JSON.stringify(obj).toLowerCase().includes(text));
+renderTable(filtered);
+}
+
+// Course filter (only for students)
+function filterCourse(){
+if(mode!=="students") return;
+let course=document.getElementById("courseFilter").value;
+if(course==="ALL"){ showStudents(); return; }
+currentData=students.filter(s=>s.course===course);
+renderTable(currentData);
+}
+
+// Student Sort
+function sortData(){
+let option=document.getElementById("sortOption").value;
+if(!option || currentData.length===0 || (mode!=="students" && mode!=="summary")) return;
+let dataCopy=[...currentData];
+dataCopy.sort((a,b)=>{
+if(typeof a[option]==="string"){ 
+return a[option].localeCompare(b[option]); 
+}
+return a[option]-b[option];
+});
+renderTable(dataCopy);
+}
+
+// Market Sort
+function sortMarketData(){
+let option=document.getElementById("marketSortOption").value;
+if(!option || currentData.length===0 || mode!=="products") return;
+let dataCopy=[...currentData];
+dataCopy.sort((a,b)=>{
+if(option==="name"){ 
+return a.name.localeCompare(b.name); 
+}
+return a[option]-b[option];
+});
+renderTable(dataCopy);
+}
+
+// Download
+function downloadData(){
+if(currentData.length===0){ alert("No data to download"); return; }
+let keys=Object.keys(currentData[0]);
+let csv=keys.join(",")+"\n";
+currentData.forEach(row=>{
+csv+=keys.map(k=>row[k]).join(",")+"\n";
+});
+let blob=new Blob([csv],{type:"text/csv"});
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="data.csv";
+a.click();
+}
+
+// Nothing shown by default - welcome message is visible
+</script>
+
+</body>
+</html>
