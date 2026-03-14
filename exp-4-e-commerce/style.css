@@ -311,37 +311,33 @@ hr {
 }
 
 /* ===== SECTION VISIBILITY CONTROL ===== */
+
 /* Hide all sections */
-section {
-  display: none;
+section{
+  display:none;
 }
 
-/* Show home section when page first loads */
-#home {
-  display: block;
+/* Show home when page loads */
+#home{
+  display:block;
 }
 
-/* When any section is targeted, hide home */
-:target {
-  display: block;
-}
-
-/* But when home is targeted, only show home */
-#home:target {
-  display: block;
-}
-
-/* This is the key part - when any other section is targeted, 
-   we use the fact that #home is NOT the target to hide it */
-#home:not(:target) {
-  display: none;
-}
-
-/* Show the targeted section */
+/* Show the clicked section */
 #menu:target,
 #gallery:target,
 #reservation:target,
 #contact:target,
-#cart:target {
-  display: block;
+#cart:target{
+  display:block;
 }
+
+/* Hide home when another section is opened */
+body:has(#menu:target) #home,
+body:has(#gallery:target) #home,
+body:has(#reservation:target) #home,
+body:has(#contact:target) #home,
+body:has(#cart:target) #home{
+  display:none;
+}
+
+

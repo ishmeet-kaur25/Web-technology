@@ -1,115 +1,323 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Web Technology Lab Experiments</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #faf3e0;
-            margin: 0;
-            padding: 40px;
-            text-align: center;
-        }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #e67e22;
-            padding-bottom: 15px;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            width: 250px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-top: 5px solid #e67e22;
-        }
-        .btn {
-            display: inline-block;
-            background: #2c3e50;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-        .btn:hover {
-            background: #e67e22;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Web Technology Lab Experiments</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+/* BODY */
+
+body{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:40px;
+overflow:hidden;
+color:white;
+background:radial-gradient(circle at bottom,#020617,#000000);
+transition:0.5s;
+}
+
+/* LIGHT THEME */
+
+body.light{
+background:linear-gradient(to top,#a5d8ff,#e7f5ff);
+color:#1e293b;
+}
+
+/* TITLE */
+
+h1{
+font-size:42px;
+margin-bottom:40px;
+text-align:center;
+z-index:2;
+}
+
+/* THEME BUTTON */
+
+.theme-btn{
+position:absolute;
+top:25px;
+right:30px;
+padding:10px 22px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+background:#3b82f6;
+color:white;
+font-weight:600;
+z-index:2;
+}
+
+/* GRID */
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+width:100%;
+max-width:1200px;
+z-index:2;
+}
+
+/* CARDS */
+
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+border-radius:18px;
+padding:30px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.2);
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+transition:0.4s;
+}
+
+body.light .card{
+background:white;
+border:1px solid #cbd5e1;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* HOVER */
+
+.card:hover{
+transform:translateY(-8px) scale(1.04);
+}
+
+/* BUTTON */
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:12px 26px;
+border-radius:30px;
+text-decoration:none;
+font-weight:600;
+background:#2563eb;
+color:white;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.08);
+}
+
+/* STARS */
+
+.star{
+position:absolute;
+border-radius:50%;
+background:white;
+opacity:0.9;
+animation:moveStars linear infinite;
+}
+
+body.light .star{
+background:#475569;
+}
+
+/* STAR MOVEMENT */
+
+@keyframes moveStars{
+from{transform:translateY(0)}
+to{transform:translateY(-120vh)}
+}
+
+/* SHOOTING STAR */
+
+.shooting-star{
+position:absolute;
+width:3px;
+height:90px;
+background:linear-gradient(white,transparent);
+opacity:0.8;
+transform:rotate(45deg);
+animation:shoot 6s linear infinite;
+}
+
+@keyframes shoot{
+0%{
+transform:translate(-100px,-100px) rotate(45deg);
+opacity:1;
+}
+100%{
+transform:translate(100vw,100vh) rotate(45deg);
+opacity:0;
+}
+}
+
+/* PLANETS (SMALL & SUBTLE) */
+
+.planet{
+position:absolute;
+border-radius:50%;
+opacity:0.35;
+filter:blur(4px);
+z-index:0;
+}
+
+/* yellow */
+
+.planet1{
+width:70px;
+height:70px;
+background:#fbbf24;
+left:3%;
+bottom:5%;
+}
+
+/* blue */
+
+.planet2{
+width:55px;
+height:55px;
+background:#60a5fa;
+right:4%;
+bottom:6%;
+}
+
+/* pink */
+
+.planet3{
+width:45px;
+height:45px;
+background:#f472b6;
+top:4%;
+left:48%;
+}
+
+</style>
 </head>
+
 <body>
 
-    <h1>Web Technology Lab Experiments</h1>
-    
-    <div class="container">
-        
-        <!-- Experiment 1 -->
-        <div class="card">
-            <h2>Experiment 1</h2>
-            <p>Personal Website<br><strong>(Basic HTML - No CSS)</strong></p>
-            <a href="exp-1-personal web no css/personalweb.HTML" class="btn">View Experiment 1</a>
-        </div>
-        
-        <!-- Experiment 2 -->
-        <div class="card">
-            <h2>Experiment 2</h2>
-            <p>E-Commerce Website<br><strong>(Basic HTML - No CSS)</strong></p>
-            <a href="exp-2-e-commerce no css/e-commerce.HTML" class="btn">View Experiment 2</a>
-        </div>
-        
-        <!-- Experiment 3 -->
-        <div class="card">
-            <h2>Experiment 3</h2>
-            <p>Personal Website<br><strong>(With CSS Styling)</strong></p>
-            <a href="exp-3-personal web/Personalweb.HTML" class="btn">View Experiment 3</a>
-        </div>
-        
-        <!-- Experiment 4 -->
-        <div class="card">
-            <h2>Experiment 4</h2>
-            <p>E-Commerce Website<br><strong>(With CSS Styling)</strong></p>
-            <a href="exp-4-e-commerce/E-commerce.HTML" class="btn">View Experiment 4</a>
-        </div>
+<button class="theme-btn" onclick="toggleTheme()">Switch Theme</button>
 
-                <!-- Experiment 5 -->
-        <div class="card">
-            <h2>Experiment 5</h2>
-            <p>calculator<br><strong>(With JavaScript)</strong></p>
-            <a href="exp-5-calculator/simple calculator.HTML" class="btn">View Experiment 5</a>
-        </div>
+<h1>Web Technology Lab Experiments</h1>
 
-             <!-- Experiment 5 -->
-        <div class="card">
-            <h2>Experiment 5</h2>
-            <p>calculator<br><strong>(With JavaScript)</strong></p>
-            <a href="exp-5-calculator/calculator.HTML" class="btn">View Experiment 5</a>
-        </div>
+<div class="container">
+<!-- Experiment 1 -->
+<div class="card">
+<h2>Experiment 1</h2>
+<p>Personal Website<br><strong>(Basic HTML - No CSS)</strong></p>
+<a href="exp-1-personal web no css/personalweb.HTML" class="btn">View Experiment 1</a>
+</div>
 
-          <!-- Experiment 6 -->
-        <div class="card">
-            <h2>Experiment 6</h2>
-            <p>registration form<br><strong>(With JavaScript)</strong></p>
-            <a href="exp-6-registration form/registration form.HTML" class="btn">View Experiment 5</a>
-        </div>
-        
-         <!-- Experiment 7 -->
-        <div class="card">
-            <h2>Experiment 7</h2>
-            <p>event handling<br><strong>(With JavaScript)</strong></p>
-            <a href="exp-7-event handling/event handling.HTML" class="btn">View Experiment 7</a>
-        </div>
+<!-- Experiment 2 -->
+<div class="card">
+<h2>Experiment 2</h2>
+<p>E-Commerce Website<br><strong>(Basic HTML - No CSS)</strong></p>
+<a href="exp-2-e-commerce no css/e-commerce.HTML" class="btn">View Experiment 2</a>
+</div>
 
-    </div>
+<!-- Experiment 3 -->
+<div class="card">
+<h2>Experiment 3</h2>
+<p>Personal Website<br><strong>(With CSS Styling)</strong></p>
+<a href="exp-3-personal web/Personalweb.HTML" class="btn">View Experiment 3</a>
+</div>
+
+<!-- Experiment 4 -->
+<div class="card">
+<h2>Experiment 4</h2>
+<p>E-Commerce Website<br><strong>(With CSS Styling)</strong></p>
+<a href="exp-4-e-commerce/E-commerce.HTML" class="btn">View Experiment 4</a>
+</div>
+
+<!-- Experiment 5 -->
+<div class="card">
+<h2>Experiment 5</h2>
+<p>Simple Calculator<br><strong>(With JavaScript)</strong></p>
+<a href="exp-5-calculator/simple calculator.HTML" class="btn">View Experiment 5</a>
+</div>
+
+<!-- Experiment 5 -->
+<div class="card">
+<h2>Experiment 5</h2>
+<p>Calculator<br><strong>(With JavaScript)</strong></p>
+<a href="exp-5-calculator/calculator.HTML" class="btn">View Experiment 6</a>
+</div>
+
+<!-- Experiment 6 -->
+<div class="card">
+<h2>Experiment 6</h2>
+<p>Registration Form<br><strong>(With JavaScript)</strong></p>
+<a href="exp-6-registration form/registration form.HTML" class="btn">View Experiment 7</a>
+</div>
+
+<!-- Experiment 7 -->
+<div class="card">
+<h2>Experiment 7</h2>
+<p>Event Handling<br><strong>(With JavaScript)</strong></p>
+<a href="exp-7-event handling/event handling.HTML" class="btn">View Experiment 8</a>
+</div>
+
+</div>
+
+<!-- PLANETS -->
+
+<div class="planet planet1"></div>
+<div class="planet planet2"></div>
+<div class="planet planet3"></div>
+
+<script>
+
+/* THEME */
+
+function toggleTheme(){
+document.body.classList.toggle("light");
+}
+
+/* STARS */
+
+for(let i=0;i<100;i++){
+
+let star=document.createElement("div");
+star.classList.add("star");
+
+let size=Math.random()*4+2;
+
+star.style.width=size+"px";
+star.style.height=size+"px";
+
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+
+star.style.boxShadow="0 0 "+(size*3)+"px white";
+
+star.style.animationDuration=(Math.random()*50+20)+"s";
+
+document.body.appendChild(star);
+}
+
+/* SHOOTING STARS */
+
+for(let i=0;i<3;i++){
+
+let shoot=document.createElement("div");
+shoot.classList.add("shooting-star");
+
+shoot.style.left=Math.random()*100+"vw";
+shoot.style.top=Math.random()*40+"vh";
+
+shoot.style.animationDelay=(Math.random()*6)+"s";
+
+document.body.appendChild(shoot);
+
+}
+
+</script>
 
 </body>
-</html> 
+</html>

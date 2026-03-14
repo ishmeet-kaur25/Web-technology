@@ -168,12 +168,12 @@ tr:hover{
 </div>
 
 <!-- Welcome Message (shown by default) -->
-<div id="welcomeMessage" class="welcome-message">
+<div id="welcomeMessage" class="welcome-message hidden">
     <p>👋 Welcome! Click on a section above to get started.</p>
 </div>
 
 <!-- Student Section (hidden by default) -->
-<div id="studentSection" class="section-container hidden">
+<div id="studentSection" class="section-container">
     <h3>Student Operations</h3>
     <button onclick="showStudents()">Show Students</button>
     <button onclick="marksAbove80()">Marks > 80</button>
@@ -391,6 +391,11 @@ a.click();
 }
 
 // Nothing shown by default - welcome message is visible
+
+// Show students automatically when page loads
+window.onload = function(){
+    showStudentSection();
+}
 </script>
 
 </body>

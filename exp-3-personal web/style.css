@@ -359,36 +359,6 @@ input[type="submit"]:hover {
 }
 
 
-/* Section visibility */
-section {
-  display: none;
-}
-
-#home {
-  display: block;
-}
-
-:target {
-  display: block;
-}
-
-#home:target {
-  display: block;
-}
-
-#home:not(:target) {
-  display: none;
-}
-
-#about:target, 
-#education:target, 
-#skills:target, 
-#projects:target, 
-#achievements:target, 
-#contact:target {
-  display: block;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .nav a {
@@ -422,3 +392,34 @@ section {
   }
 }
 
+/* ===== SECTION CONTROL ===== */
+
+/* Hide all sections */
+section{
+display:none;
+}
+
+/* Show home first */
+#home{
+display:block;
+}
+
+/* Show selected section */
+#about:target,
+#education:target,
+#skills:target,
+#projects:target,
+#achievements:target,
+#contact:target{
+display:block;
+}
+
+/* Hide home when another section is opened */
+body:has(#about:target) #home,
+body:has(#education:target) #home,
+body:has(#skills:target) #home,
+body:has(#projects:target) #home,
+body:has(#achievements:target) #home,
+body:has(#contact:target) #home{
+display:none;
+}
