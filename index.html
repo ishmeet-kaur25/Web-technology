@@ -38,9 +38,15 @@ color:#1e293b;
 
 h1{
 font-size:42px;
-margin-bottom:40px;
+margin-bottom:10px;
 text-align:center;
 z-index:2;
+}
+
+.subtitle{
+text-align:center;
+margin-bottom:40px;
+opacity:0.8;
 }
 
 /* THEME BUTTON */
@@ -90,13 +96,9 @@ border:1px solid #cbd5e1;
 box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* HOVER */
-
 .card:hover{
 transform:translateY(-8px) scale(1.04);
 }
-
-/* BUTTON */
 
 .btn{
 display:inline-block;
@@ -114,19 +116,145 @@ transition:0.3s;
 transform:scale(1.08);
 }
 
-/* PHP BADGE */
+/* PHP SECTION STYLES */
+.php-section{
+margin: 40px 0;
+width: 100%;
+}
+
+.php-header{
+text-align: center;
+margin-bottom: 30px;
+}
+
+.php-header h2{
+font-size: 2rem;
+margin-bottom: 10px;
+}
+
+.php-header p{
+opacity: 0.8;
+}
+
+.php-grid{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+gap: 40px;
+width: 100%;
+max-width: 1300px;
+margin: 0 auto;
+}
+
+.php-card{
+background: rgba(255,255,255,0.1);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+overflow: hidden;
+border: 1px solid rgba(255,255,255,0.2);
+transition: 0.4s;
+}
+
+body.light .php-card{
+background: white;
+border: 1px solid #e0e0e0;
+}
+
+.php-card:hover{
+transform: translateY(-10px);
+}
+
+/* VERTICAL STACKED IMAGES */
+.php-card-images{
+display: flex;
+flex-direction: column;
+gap: 10px;
+padding: 15px;
+background: #1a1a2e;
+}
+
+body.light .php-card-images{
+background: #f0f0f0;
+}
+
+.php-card-image{
+width: 100%;
+height: 180px;
+overflow: hidden;
+background: #2a2a3e;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 10px;
+}
+
+.php-card-image img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* SINGLE IMAGE STYLE */
+.php-card-image-single{
+width: 100%;
+height: 250px;
+overflow: hidden;
+background: #2a2a3e;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 10px;
+margin: 15px;
+}
+
+.php-card-image-single img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.php-card-content{
+padding: 20px;
+text-align: center;
+}
+
+.php-card-content h3{
+font-size: 1.5rem;
+margin-bottom: 10px;
+}
+
+.php-card-content p{
+opacity: 0.8;
+margin-bottom: 15px;
+font-size: 14px;
+}
+
 .php-badge{
-display:inline-block;
-margin-top:10px;
-padding:5px 12px;
-border-radius:20px;
-font-size:11px;
-background:#28a745;
-color:white;
+display: inline-block;
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 11px;
+margin: 5px;
+background: #28a745;
+color: white;
+}
+
+.php-btn{
+display: inline-block;
+margin-top: 15px;
+padding: 10px 25px;
+border-radius: 30px;
+text-decoration: none;
+font-weight: 600;
+background: #2563eb;
+color: white;
+transition: 0.3s;
+}
+
+.php-btn:hover{
+transform: scale(1.05);
 }
 
 /* STARS */
-
 .star{
 position:absolute;
 border-radius:50%;
@@ -139,14 +267,10 @@ body.light .star{
 background:#475569;
 }
 
-/* STAR MOVEMENT */
-
 @keyframes moveStars{
 from{transform:translateY(0)}
 to{transform:translateY(-120vh)}
 }
-
-/* SHOOTING STAR */
 
 .shooting-star{
 position:absolute;
@@ -168,8 +292,6 @@ transform:translate(100vw,100vh) rotate(45deg);
 opacity:0;
 }
 }
-
-/* PLANETS */
 
 .planet{
 position:absolute;
@@ -203,19 +325,10 @@ top:4%;
 left:48%;
 }
 
-/* Section Title */
-.section-title{
-width:100%;
-text-align:center;
-margin:20px 0 10px 0;
-font-size:1.8rem;
-grid-column:1/-1;
-}
-
 hr{
-width:80%;
-margin:20px auto;
-border-color:rgba(255,255,255,0.2);
+width: 80%;
+margin: 30px auto;
+border-color: rgba(255,255,255,0.2);
 }
 
 </style>
@@ -226,151 +339,160 @@ border-color:rgba(255,255,255,0.2);
 <button class="theme-btn" onclick="toggleTheme()">Switch Theme</button>
 
 <h1>Web Technology Lab Experiments</h1>
-
-<div class="container">
+<div class="subtitle">Ishmeet Kaur</div>
 
 <!-- ========== EXPERIMENTS 1-7 (HTML/CSS/JS) ========== -->
-
-<!-- Experiment 1 -->
+<div class="container">
 <div class="card">
 <h2>Experiment 1</h2>
 <p>Personal Website<br><strong>(Basic HTML - No CSS)</strong></p>
 <a href="exp-1-personal web no css/personalweb.HTML" class="btn">View Experiment 1</a>
 </div>
 
-<!-- Experiment 2 -->
 <div class="card">
 <h2>Experiment 2</h2>
 <p>E-Commerce Website<br><strong>(Basic HTML - No CSS)</strong></p>
 <a href="exp-2-e-commerce no css/e-commerce.HTML" class="btn">View Experiment 2</a>
 </div>
 
-<!-- Experiment 3 -->
 <div class="card">
 <h2>Experiment 3</h2>
 <p>Personal Website<br><strong>(With CSS Styling)</strong></p>
 <a href="exp-3-personal web/Personalweb.HTML" class="btn">View Experiment 3</a>
 </div>
 
-<!-- Experiment 4 -->
 <div class="card">
 <h2>Experiment 4</h2>
 <p>E-Commerce Website<br><strong>(With CSS Styling)</strong></p>
 <a href="exp-4-e-commerce/E-commerce.HTML" class="btn">View Experiment 4</a>
 </div>
 
-<!-- Experiment 5 -->
 <div class="card">
 <h2>Experiment 5</h2>
 <p>Simple Calculator<br><strong>(With JavaScript)</strong></p>
 <a href="exp-5-calculator/simple%20calculator.HTML" class="btn">View Experiment 5</a>
 </div>
 
-<!-- Experiment 6 -->
 <div class="card">
 <h2>Experiment 6</h2>
 <p>Calculator<br><strong>(With JavaScript)</strong></p>
 <a href="exp-5-calculator/calculator.HTML" class="btn">View Experiment 6</a>
 </div>
 
-<!-- Experiment 7 -->
 <div class="card">
 <h2>Experiment 7</h2>
 <p>Registration Form<br><strong>(With JavaScript)</strong></p>
 <a href="exp-6-registration%20form/registration%20form.HTML" class="btn">View Experiment 7</a>
 </div>
 
-<!-- Experiment 8 -->
 <div class="card">
 <h2>Experiment 8</h2>
 <p>Event Handling<br><strong>(With JavaScript)</strong></p>
 <a href="exp-7-event%20handling/event%20handling.HTML" class="btn">View Experiment 8</a>
 </div>
+</div>
 
 <hr>
 
-<!-- ========== EXPERIMENTS 8,9,10 (PHP BACKEND) ========== -->
+<!-- ========== PHP EXPERIMENTS SECTION (WITH PROOF IMAGES VERTICAL) ========== -->
+<div class="php-section">
+    <div class="php-header">
+        <h2>🔥 PHP Backend Experiments</h2>
+        <p>Form Handling | MySQL CRUD | Sessions & Cookies</p>
+    </div>
 
-<div class="section-title">🔥 PHP Backend Experiments</div>
+    <div class="php-grid">
+        <!-- Experiment 8 PHP - 2 PROOF IMAGES VERTICAL STACK -->
+        <div class="php-card">
+            <div class="php-card-images">
+                <div class="php-card-image">
+                    <img src="exp-8/proof1.jpg" alt="Proof 1" onerror="this.parentElement.innerHTML='<div style=\'padding:60px;text-align:center;\'>📸 proof1.jpg<br>Add in exp-8 folder</div>'">
+                </div>
+                <div class="php-card-image">
+                    <img src="exp-8/proof2.jpg" alt="Proof 2" onerror="this.parentElement.innerHTML='<div style=\'padding:60px;text-align:center;\'>📸 proof2.jpg<br>Add in exp-8 folder</div>'">
+                </div>
+            </div>
+            <div class="php-card-content">
+                <h3>Experiment 8</h3>
+                <p><strong>Form Handling & Validation</strong> using PHP</p>
+                <span class="php-badge">PHP</span>
+                <span class="php-badge">Form Validation</span>
+                <span class="php-badge">POST/GET</span>
+                <br>
+                <a href="exp-8/index.php" class="php-btn">View Experiment 8 →</a>
+            </div>
+        </div>
 
-<!-- Experiment 8 - PHP Form Handling -->
-<div class="card">
-<h2>Experiment 8</h2>
-<p>Form Handling & Validation<br><strong>(With PHP)</strong></p>
-<span class="php-badge">PHP | Form Validation</span>
-<a href="exp-8/index.php" class="btn">View Experiment 8 →</a>
-</div>
+        <!-- Experiment 9 PHP - 2 PROOF IMAGES VERTICAL STACK -->
+        <div class="php-card">
+            <div class="php-card-images">
+                <div class="php-card-image">
+                    <img src="exp-9/proof1.jpg" alt="Proof 1" onerror="this.parentElement.innerHTML='<div style=\'padding:60px;text-align:center;\'>📸 proof1.jpg<br>Add in exp-9 folder</div>'">
+                </div>
+                <div class="php-card-image">
+                    <img src="exp-9/proof2.jpg" alt="Proof 2" onerror="this.parentElement.innerHTML='<div style=\'padding:60px;text-align:center;\'>📸 proof2.jpg<br>Add in exp-9 folder</div>'">
+                </div>
+            </div>
+            <div class="php-card-content">
+                <h3>Experiment 9</h3>
+                <p><strong>MySQL CRUD Operations</strong> with PHP & Database</p>
+                <span class="php-badge">PHP</span>
+                <span class="php-badge">MySQL</span>
+                <span class="php-badge">CRUD</span>
+                <br>
+                <a href="exp-9/index.php" class="php-btn">View Experiment 9 →</a>
+            </div>
+        </div>
 
-<!-- Experiment 9 - PHP MySQL CRUD -->
-<div class="card">
-<h2>Experiment 9</h2>
-<p>MySQL CRUD Operations<br><strong>(PHP + MySQL Database)</strong></p>
-<span class="php-badge">PHP | MySQL | CRUD</span>
-<a href="exp-9/index.php" class="btn">View Experiment 9 →</a>
-</div>
-
-<!-- Experiment 10 - PHP Sessions & Cookies -->
-<div class="card">
-<h2>Experiment 10</h2>
-<p>Sessions & Cookies<br><strong>(PHP Session Management)</strong></p>
-<span class="php-badge">PHP | Sessions | Cookies</span>
-<a href="exp-10/index.php" class="btn">View Experiment 10 →</a>
-</div>
-
+        <!-- Experiment 10 PHP - 1 PROOF IMAGE -->
+        <div class="php-card">
+            <div class="php-card-image-single">
+                <img src="exp-10/proof.jpg" alt="Proof" onerror="this.parentElement.innerHTML='<div style=\'padding:80px;text-align:center;\'>📸 proof.jpg<br>Add in exp-10 folder</div>'">
+            </div>
+            <div class="php-card-content">
+                <h3>Experiment 10</h3>
+                <p><strong>Sessions & Cookies</strong> for persistent user data</p>
+                <span class="php-badge">PHP</span>
+                <span class="php-badge">Sessions</span>
+                <span class="php-badge">Cookies</span>
+                <br>
+                <a href="exp-10/index.php" class="php-btn">View Experiment 10 →</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- PLANETS -->
-
 <div class="planet planet1"></div>
 <div class="planet planet2"></div>
 <div class="planet planet3"></div>
 
 <script>
-
-/* THEME */
-
 function toggleTheme(){
 document.body.classList.toggle("light");
 }
 
-/* STARS */
-
 for(let i=0;i<100;i++){
-
 let star=document.createElement("div");
 star.classList.add("star");
-
 let size=Math.random()*4+2;
-
 star.style.width=size+"px";
 star.style.height=size+"px";
-
 star.style.left=Math.random()*100+"vw";
 star.style.top=Math.random()*100+"vh";
-
 star.style.boxShadow="0 0 "+(size*3)+"px white";
-
 star.style.animationDuration=(Math.random()*50+20)+"s";
-
 document.body.appendChild(star);
 }
 
-/* SHOOTING STARS */
-
 for(let i=0;i<3;i++){
-
 let shoot=document.createElement("div");
 shoot.classList.add("shooting-star");
-
 shoot.style.left=Math.random()*100+"vw";
 shoot.style.top=Math.random()*40+"vh";
-
 shoot.style.animationDelay=(Math.random()*6)+"s";
-
 document.body.appendChild(shoot);
-
 }
-
 </script>
 
 </body>

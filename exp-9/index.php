@@ -77,7 +77,7 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC");
         }
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -91,11 +91,18 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC");
         .product-card:hover {
             transform: translateY(-5px);
         }
-        .product-emoji {
-            font-size: 80px;
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .product-image {
+            height: 250px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .product-info {
             padding: 20px;
@@ -127,6 +134,7 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC");
             border-radius: 25px;
             font-size: 14px;
             display: inline-block;
+            transition: 0.3s;
         }
         .edit-btn {
             background: #ffc107;
@@ -195,17 +203,27 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC");
         <?php endif; ?>
 
         <div class="products-grid">
-            <?php while($row = mysqli_fetch_assoc($result)): ?>
+            <?php 
+            // Array of real shoe images (random好看的鞋子图片)
+            $shoe_images = [
+                'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=250&fit=crop',
+                'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=250&fit=crop',
+                'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=400&h=250&fit=crop',
+                'https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&h=250&fit=crop',
+                'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&h=250&fit=crop',
+                'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=250&fit=crop',
+                'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&h=250&fit=crop',
+                'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=250&fit=crop'
+            ];
+            
+            $index = 0;
+            while($row = mysqli_fetch_assoc($result)): 
+                $random_image = $shoe_images[$index % count($shoe_images)];
+                $index++;
+            ?>
             <div class="product-card">
-                <div class="product-emoji">
-                    <?php 
-                    $emoji = '👟';
-                    if(strpos($row['name'], 'Nike') !== false) $emoji = '👟';
-                    elseif(strpos($row['name'], 'Adidas') !== false) $emoji = '🏃';
-                    elseif(strpos($row['name'], 'Puma') !== false) $emoji = '🥿';
-                    else $emoji = '👟';
-                    echo $emoji;
-                    ?>
+                <div class="product-image">
+                    <img src="<?php echo $random_image; ?>" alt="Shoe Image">
                 </div>
                 <div class="product-info">
                     <h3><?php echo htmlspecialchars($row['name']); ?></h3>
@@ -236,7 +254,7 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC");
             </div>
             <div class="php-badge">
                 ✅ PHP Version: <?php echo phpversion(); ?> | 
-                MySQL: Connected on port 3307 | 
+                MySQL: Connected | 
                 Database: ecommerce_db | 
                 CRUD: ✅ Create, Read, Update, Delete Working
             </div>
