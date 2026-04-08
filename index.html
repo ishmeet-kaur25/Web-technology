@@ -21,7 +21,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 padding:40px;
-overflow:hidden;
+overflow:auto;
 color:white;
 background:radial-gradient(circle at bottom,#020617,#000000);
 transition:0.5s;
@@ -46,7 +46,7 @@ z-index:2;
 /* THEME BUTTON */
 
 .theme-btn{
-position:absolute;
+position:fixed;
 top:25px;
 right:30px;
 padding:10px 22px;
@@ -56,18 +56,19 @@ cursor:pointer;
 background:#3b82f6;
 color:white;
 font-weight:600;
-z-index:2;
+z-index:100;
 }
 
 /* GRID */
 
 .container{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:30px;
 width:100%;
-max-width:1200px;
+max-width:1400px;
 z-index:2;
+margin-bottom:40px;
 }
 
 /* CARDS */
@@ -76,7 +77,7 @@ z-index:2;
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(10px);
 border-radius:18px;
-padding:30px;
+padding:25px;
 text-align:center;
 border:1px solid rgba(255,255,255,0.2);
 box-shadow:0 10px 30px rgba(0,0,0,0.5);
@@ -111,6 +112,17 @@ transition:0.3s;
 
 .btn:hover{
 transform:scale(1.08);
+}
+
+/* PHP BADGE */
+.php-badge{
+display:inline-block;
+margin-top:10px;
+padding:5px 12px;
+border-radius:20px;
+font-size:11px;
+background:#28a745;
+color:white;
 }
 
 /* STARS */
@@ -157,7 +169,7 @@ opacity:0;
 }
 }
 
-/* PLANETS (SMALL & SUBTLE) */
+/* PLANETS */
 
 .planet{
 position:absolute;
@@ -167,8 +179,6 @@ filter:blur(4px);
 z-index:0;
 }
 
-/* yellow */
-
 .planet1{
 width:70px;
 height:70px;
@@ -176,8 +186,6 @@ background:#fbbf24;
 left:3%;
 bottom:5%;
 }
-
-/* blue */
 
 .planet2{
 width:55px;
@@ -187,14 +195,27 @@ right:4%;
 bottom:6%;
 }
 
-/* pink */
-
 .planet3{
 width:45px;
 height:45px;
 background:#f472b6;
 top:4%;
 left:48%;
+}
+
+/* Section Title */
+.section-title{
+width:100%;
+text-align:center;
+margin:20px 0 10px 0;
+font-size:1.8rem;
+grid-column:1/-1;
+}
+
+hr{
+width:80%;
+margin:20px auto;
+border-color:rgba(255,255,255,0.2);
 }
 
 </style>
@@ -207,6 +228,9 @@ left:48%;
 <h1>Web Technology Lab Experiments</h1>
 
 <div class="container">
+
+<!-- ========== EXPERIMENTS 1-7 (HTML/CSS/JS) ========== -->
+
 <!-- Experiment 1 -->
 <div class="card">
 <h2>Experiment 1</h2>
@@ -239,28 +263,58 @@ left:48%;
 <div class="card">
 <h2>Experiment 5</h2>
 <p>Simple Calculator<br><strong>(With JavaScript)</strong></p>
-<a href="exp-5-calculator/simple calculator.HTML" class="btn">View Experiment 5</a>
-</div>
-
-<!-- Experiment 5 -->
-<div class="card">
-<h2>Experiment 5</h2>
-<p>Calculator<br><strong>(With JavaScript)</strong></p>
-<a href="exp-5-calculator/calculator.HTML" class="btn">View Experiment 6</a>
+<a href="exp-5-calculator/simple%20calculator.HTML" class="btn">View Experiment 5</a>
 </div>
 
 <!-- Experiment 6 -->
 <div class="card">
 <h2>Experiment 6</h2>
-<p>Registration Form<br><strong>(With JavaScript)</strong></p>
-<a href="exp-6-registration form/registration form.HTML" class="btn">View Experiment 7</a>
+<p>Calculator<br><strong>(With JavaScript)</strong></p>
+<a href="exp-5-calculator/calculator.HTML" class="btn">View Experiment 6</a>
 </div>
 
 <!-- Experiment 7 -->
 <div class="card">
 <h2>Experiment 7</h2>
+<p>Registration Form<br><strong>(With JavaScript)</strong></p>
+<a href="exp-6-registration%20form/registration%20form.HTML" class="btn">View Experiment 7</a>
+</div>
+
+<!-- Experiment 8 -->
+<div class="card">
+<h2>Experiment 8</h2>
 <p>Event Handling<br><strong>(With JavaScript)</strong></p>
-<a href="exp-7-event handling/event handling.HTML" class="btn">View Experiment 8</a>
+<a href="exp-7-event%20handling/event%20handling.HTML" class="btn">View Experiment 8</a>
+</div>
+
+<hr>
+
+<!-- ========== EXPERIMENTS 8,9,10 (PHP BACKEND) ========== -->
+
+<div class="section-title">🔥 PHP Backend Experiments</div>
+
+<!-- Experiment 8 - PHP Form Handling -->
+<div class="card">
+<h2>Experiment 8</h2>
+<p>Form Handling & Validation<br><strong>(With PHP)</strong></p>
+<span class="php-badge">PHP | Form Validation</span>
+<a href="exp-8/index.php" class="btn">View Experiment 8 →</a>
+</div>
+
+<!-- Experiment 9 - PHP MySQL CRUD -->
+<div class="card">
+<h2>Experiment 9</h2>
+<p>MySQL CRUD Operations<br><strong>(PHP + MySQL Database)</strong></p>
+<span class="php-badge">PHP | MySQL | CRUD</span>
+<a href="exp-9/index.php" class="btn">View Experiment 9 →</a>
+</div>
+
+<!-- Experiment 10 - PHP Sessions & Cookies -->
+<div class="card">
+<h2>Experiment 10</h2>
+<p>Sessions & Cookies<br><strong>(PHP Session Management)</strong></p>
+<span class="php-badge">PHP | Sessions | Cookies</span>
+<a href="exp-10/index.php" class="btn">View Experiment 10 →</a>
 </div>
 
 </div>
